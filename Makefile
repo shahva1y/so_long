@@ -2,7 +2,10 @@ NAME = so_long
 NAME_BONUS = bonus
 
 SRCS =	main.c\
-		ft_valid.c\
+		ft_process_args.c\
+		ft_parse_file.c\
+		ft_list_utils.c\
+		ft_parse_map.c\
 
 LIB = libft.a
 LIB_SRC = ./libft
