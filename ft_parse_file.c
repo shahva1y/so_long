@@ -1,148 +1,53 @@
 #include "so_long.h"
-#include <stdio.h>
 
-static int	ft_memmory_boost(char **line, int size)
+static t_bool	ft_check_format(char *file)
 {
-	char	*newline;
-	int		length;
-	int		i;
+	char	*format;
 
-	i = 0;
-	length = ft_strlen(*line);
-	newline = (char *) malloc((length + size) * sizeof(char));
-	if (!newline)
-		ft_error("Ошибка выделения памяти!");
-	newline[length + size - 1] = '\0';
-	while ((*line)[i])
-	{
-		newline[i] = (*line)[i];
-		i++;
-	}
-	newline[i] = '\0';
-	free((*line));
-	(*line) = newline;
-	return (length + size);
-}
-
-static int	ft_read_line(int fd, char **buffer)
-{
-	int		i;
-	char	c;
-	int		size;
-
-	i = 0;
-	c = '\0';
-	size = 1000;
-	(*buffer) = malloc(size * sizeof(char));
-	if (!(*buffer))
-		ft_error("Oooops! Memory allocation error!");
-	while (read(fd, &c, 1) && c != '\n' && c != '\0')
-	{
-		(*buffer)[i] = c;
-		if (i + 2 == size)
-			size = ft_memmory_boost(buffer, size);
-		i++;
-	}
-	(*buffer)[i] = '\0';
-	if (i == 0 && c == '\0')
-	{
-		free((*buffer));
-		(*buffer) = NULL;
-	}
-	if (i == 0 && c == '\n')
-		i++;
-	return (i);
-}
-
-static t_bool	ft_isvalid_char(char c)
-{
-	//'\n'
-	if (c != '1' && c != '0'
-		&& c != 'P' && c != 'C' && c != 'E')
+	format = ft_strchr(file, '.');
+	if (ft_strcmp(format, ".ber"))
 		return (FALSE);
 	return (TRUE);
 }
 
-
-static t_bool	ft_iswall(char	*line)
+int	ft_open_file(char	*file)
 {
-	int	i;
+	int		fd;
 
-	i = 0;
-	while(line[i] == '1')
-		i++;
-	if (line[i] == '\0' && i != 0)
-		return (TRUE);
-	return (FALSE);
+	if (!ft_check_format(file))
+	{
+		ft_error("Oooops! Only .ber file!");
+		return (-1);
+	}
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		ft_error("Oooops! File doest open!");
+	return (fd);
 }
 
-
-static t_bool	ft_check_line(char *line)
+t_meta	*ft_parse_file(char *file)
 {
-	int	i;
+	int		fd;
+	char	**array;
+	t_meta	*meta;
 
-	if (!line)
-		return (FALSE);
-	if (line[0] == '\0')
-		return (FALSE);
-	i = 0;
-	while (line[i])
+	fd = ft_open_file(file);
+	if (fd < 0)
+		return (NULL);
+	array = ft_read_file(fd);
+	if (close(fd) == -1)
 	{
-		if (!ft_isvalid_char(line[i]))
-			ft_error("Ooooops!");
-		i++;
+		ft_free_array(array);
+		ft_error("file close error!");
+		return (NULL);
 	}
-	return (TRUE);
-}
-
-
-char	**ft_parse_file(int fd)
-{
-	char	*line;
-	t_node	*list;
-	char	**map;
-
-	line = NULL;
-	list = 0;
-	//условие в цикле можно заменить на более общую функцию!
-	//ft_get_map();
-	//ft_isvalid_map();
-	//Создание карты из файла в виде списка.
-	while (ft_read_line(fd, &line) && !ft_check_line(line))
-		free(line);
-	ft_list_add(&list, line);
-	while (ft_read_line(fd, &line) && ft_check_line(line))
-		ft_list_add(&list, line);
-	while (ft_read_line(fd, &line) && !ft_check_line(line))
-		free(line);
-	if (line)
-		ft_error("Ooooops!");
-
-	//list != NULL?????
-	//??? ft_check_perimeter????
-	t_node	*tmp;
-	unsigned int		width;
-
-	//варлидация карты
-	tmp = list;
-	//+проверка длинны
-	width = ft_strlen(tmp->line);
-	if (!ft_iswall(tmp->line))
-		ft_error("Wall error!");
-	while(tmp->next != NULL)
+	if (!array)
+		return (NULL);
+	meta = ft_parse_map(array);
+	if (!meta)
 	{
-		//+проверка на 1 в начале и в конце
-		//+проверка на наличие необходимых элементов карты
-		if (width != ft_strlen(tmp->line))
-			ft_error("Wall error!");
-		if ((tmp->line)[0] != '1' || (tmp->line)[width - 1] != '1')
-			ft_error("Wall error!");
-		tmp = tmp->next;
+		ft_free_array(array);
+		return (NULL);
 	}
-	if (!ft_iswall(tmp->line) || width != ft_strlen(tmp->line))
-		ft_error("Wall error!");
-	//Карта в виде массива
-	map = ft_list_to_array(list);
-	ft_list_free(list);
-	return (map);
+	return (meta);
 }

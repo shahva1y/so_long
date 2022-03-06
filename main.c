@@ -1,41 +1,28 @@
-#include <stdio.h>
-
 #include "so_long.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
+	t_set	*set;
+	t_meta	*meta;
 	t_mlx	*mlx;
-	t_meta	*game;
-	mlx = malloc(sizeof(t_mlx));
-	if (!mlx)
+	t_img	*img;
+
+	if (argc != 2)
+	{
+		ft_error("Usage: ./so_long file_name.ber");
 		return (1);
-	game = ft_process_args(argc, argv);
-
-	/*
-	установка соединения с провильной графической системой
-	окно еще не создается
-	*/
-	mlx->mlx = mlx_init();
-	/*
-	 * инициализация крошечного окна
-	 * закрыть можно будет через терминал ctrl+C
-	 * эта функция вернет указатель на окно, которое мы создали
-	 * */
-	int	width = (int) ft_strlen((game->map)[0]);
-	int	height = 0;
-	while (game->map[height])
-		height++;
-	mlx->win = mlx_new_window(mlx, width * 50,  height * 50, "so_long");
-
-	//mlx_hook(mlx_win, );
-	// mlx_loop() инициализирует рендеринг окна
-	/*
-	 * Бесконечный цикл, который держит программу запущенной,
-	 * окно открытым и будет продолжать обнаруживать различные события
-	 * и вызывать функции, которые мы к ним подключили (?)
-	 * Любой код, после этой функции не будет выполнен!
-	 * */
-	mlx_loop(mlx);
-
+	}
+	meta = ft_parse_file(argv[1]);
+	mlx = ft_init_t_mlx(meta);
+	img = ft_init_t_img(mlx);
+	if (!meta || !mlx || !img)
+		ft_error_exit(meta, mlx, img);
+	set = ft_init_t_set(meta, mlx, img);
+	if (!set)
+		ft_error_exit(meta, mlx, img);
+	mlx_hook(mlx->win, 2, 0, ft_key_press, set);
+	mlx_loop_hook(mlx->mlx, ft_frame_update, set);
+	mlx_hook(mlx->win, 17, 0, ft_exit, 0);
+	mlx_loop(mlx->mlx);
 	return (0);
 }

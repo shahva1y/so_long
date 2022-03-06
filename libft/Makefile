@@ -28,24 +28,13 @@ override	SRCS =	ft_isalpha.c		ft_toupper.c\
 	   				ft_putendl_fd.c\
 	   				ft_putnbr_fd.c\
 
-SRCS_B = ft_lstnew.c\
-		 ft_lstadd_front.c\
-		 ft_lstsize.c\
-		 ft_lstlast.c\
-		 ft_lstadd_back.c\
-		 ft_lstdelone.c\
-		 ft_lstclear.c\
-		 ft_lstiter.c\
-		 ft_lstmap.c\
-
 OBJS = $(SRCS:%.c=%.o)
-OBJS_B = $(SRCS_B:%.c=%.o)
 override	HEADER = libft.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER)
 
-.PHONY	: all clean fclean re bonus
+.PHONY	: all clean fclean re
 
 all		: $(NAME)
 
@@ -62,6 +51,3 @@ fclean	: clean
 	rm -f $(NAME)
 
 re		: fclean all
-
-bonus	:
-	@make OBJS='$(OBJS_B)' all
