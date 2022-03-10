@@ -69,11 +69,11 @@ t_bool	ft_check_inside(t_list *list)
 		list = list->next;
 	}
 	if (count.hero != 1)
-		ft_error("Incorrect number of players!");
+		ft_error("incorrect number of players!");
 	if (count.items < 1)
-		ft_error("No items!");
+		ft_error("no items!");
 	if (count.exits < 1)
-		ft_error("No exits!");
+		ft_error("no exits!");
 	if ((count.hero != 1) || (count.items < 1) || (count.exits < 1))
 		return (FALSE);
 	return (TRUE);

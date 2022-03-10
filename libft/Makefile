@@ -28,7 +28,7 @@ override	SRCS =	ft_isalpha.c		ft_toupper.c\
 	   				ft_putendl_fd.c\
 	   				ft_putnbr_fd.c\
 
-OBJS = $(SRCS:%.c=%.o)
+override	OBJS = $(SRCS:%.c=%.o)
 override	HEADER = libft.h
 
 CC = gcc

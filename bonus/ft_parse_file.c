@@ -16,12 +16,12 @@ int	ft_open_file(char	*file)
 
 	if (!ft_check_format(file))
 	{
-		ft_error("Oooops! Only .ber file!");
+		ft_error("file format error! (only .ber file)");
 		return (-1);
 	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_error("Oooops! File doest open!");
+		ft_error("open file error!");
 	return (fd);
 }
 

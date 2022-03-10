@@ -9,8 +9,8 @@ int	ft_exit(t_set	*set)
 void	ft_error_exit(t_meta *meta, t_mlx *mlx, t_img *img)
 {
 	ft_free_t_meta(meta);
-	ft_free_t_mlx(mlx);
-	ft_free_t_img(img);
+	ft_destroy_t_img(mlx, img);
+	ft_destroy_t_mlx(mlx);
 	exit(1);
 }
 

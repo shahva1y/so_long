@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+override	NAME = libftprintf.a
 
 override	SRCS = 	ft_printf.c\
 					ft_print_str.c			ft_print_char.c			ft_number_bit.c\
@@ -9,7 +9,7 @@ override	SRCS = 	ft_printf.c\
 LIB = libft.a
 LIB_SRC = ../libft
 
-OBJS = $(SRCS:%.c=%.o)
+override	OBJS = $(SRCS:%.c=%.o)
 override	HEADER = ft_printf.h
 
 CC = gcc

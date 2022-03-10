@@ -16,7 +16,7 @@ t_map	*ft_init_t_map(char **array)
 	map = malloc(sizeof(t_map));
 	if (!map)
 	{
-		ft_error("t_map init error!");
+		ft_error("memory allocation error! (t_map)");
 		return (NULL);
 	}
 	map->map = array;

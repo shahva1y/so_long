@@ -1,27 +1,52 @@
 NAME = so_long
-NAME_BONUS = bonus
+NAME_BONUS = so_long_bonus
 
-SRCS =	main.c\
-		ft_parse_file.c\
-		ft_read_file.c\
-		ft_get_next_line.c\
-		ft_parse_map.c\
+SRCS =	src/main.c\
+		src/ft_parse_file.c\
+		src/ft_read_file.c\
+		src/ft_get_next_line.c\
+		src/ft_parse_map.c\
 		\
-		ft_check_utils.c\
+		src/ft_check_utils.c\
 		\
-		ft_key_press.c\
-		ft_frame_update.c\
+		src/ft_key_press.c\
+		src/ft_frame_update.c\
 		\
-		ft_t_mlx_utils.c\
-		ft_t_meta_utils.c\
-		ft_t_img_utils.c\
-		ft_t_set_utils.c\
-		ft_t_list_utils.c\
-		ft_t_hero_utils.c\
-		ft_t_map_utils.c\
+		src/ft_t_mlx_utils.c\
+		src/ft_t_meta_utils.c\
+		src/ft_t_img_utils.c\
+		src/ft_t_set_utils.c\
+		src/ft_t_list_utils.c\
+		src/ft_t_hero_utils.c\
+		src/ft_t_map_utils.c\
 		\
-		ft_free.c\
-		ft_exit.c\
+		src/ft_free.c\
+		src/ft_exit.c\
+
+SRCS_BONUS =	bonus/main.c\
+                bonus/ft_parse_file.c\
+                bonus/ft_read_file.c\
+                bonus/ft_get_next_line.c\
+                bonus/ft_parse_map.c\
+                \
+                bonus/ft_check_utils.c\
+                \
+                bonus/ft_key_press.c\
+                bonus/ft_frame_update.c\
+                \
+                bonus/ft_t_mlx_utils.c\
+                bonus/ft_t_meta_utils.c\
+                bonus/ft_t_img_utils.c\
+                bonus/ft_t_set_utils.c\
+                bonus/ft_t_list_utils.c\
+                bonus/ft_t_hero_utils.c\
+                bonus/ft_t_enemy_utils.c\
+                bonus/ft_t_map_utils.c\
+                \
+            	bonus/ft_t_cell_utils.c\
+            	bonus/ft_t_cell_init_utils.c\
+                bonus/ft_free.c\
+                bonus/ft_exit.c\
 
 LIB = libft.a
 LIB_SRC = ./libft
@@ -31,8 +56,8 @@ LIB_PRINT_SRC = ./ft_printf
 
 OBJS = $(SRCS:%.c=%.o)
 OBJS_BONUS = $(SRCS_BONUS:%.c=%.o)
-HEADER = so_long.h
-HEADER_BONUS = so_long.h
+HEADER = src/so_long.h
+HEADER_BONUS = bonus/so_long.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER)
@@ -57,6 +82,7 @@ clean	:
 	$(MAKE) clean -C $(LIB_SRC)
 	$(MAKE) clean -C $(LIB_PRINT_SRC)
 	rm -f $(OBJS)
+	rm -f $(OBJS_BONUS)
 
 fclean	: clean
 	$(MAKE) fclean -C $(LIB_SRC)
@@ -66,6 +92,6 @@ fclean	: clean
 
 bonus	:
 	rm -f $(OBJS)
-	make SRCS='$(SRCS_BONUS)' HEADER='$(HEADER_BONUS)' all
+	make SRCS='$(SRCS_BONUS)' HEADER='$(HEADER_BONUS)' NAME='$(NAME_BONUS)' all
 
 re		: fclean all

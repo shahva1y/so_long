@@ -36,17 +36,26 @@ static void	ft_move(t_meta *meta, int dx, int dy)
 
 int	ft_key_press(int keycode, t_set *set)
 {
-	t_meta	*meta;
-
-	meta = set->meta;
 	if (keycode == W)
-		ft_move(meta, 0, -1);
+	{
+		(set->img)->hero = ((set->img)->hero_dir)[2];
+		ft_move(set->meta, 0, -1);
+	}
 	else if (keycode == S)
-		ft_move(meta, 0, +1);
+	{
+		(set->img)->hero = ((set->img)->hero_dir)[0];
+		ft_move(set->meta, 0, +1);
+	}
 	else if (keycode == A)
-		ft_move(meta, -1, 0);
+	{
+		(set->img)->hero = ((set->img)->hero_dir)[1];
+		ft_move(set->meta, -1, 0);
+	}
 	else if (keycode == D)
-		ft_move(meta, +1, 0);
+	{
+		(set->img)->hero = ((set->img)->hero_dir)[0];
+		ft_move(set->meta, +1, 0);
+	}
 	else if (keycode == ESC)
 		ft_exit(set);
 	return (0);

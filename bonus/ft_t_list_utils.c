@@ -9,7 +9,7 @@ void	ft_free_t_list_with_content(t_list *list)
 		tmp = list;
 		list = list->next;
 		ft_free(tmp->line);
-		ft_free(tmp->line);
+		ft_free(tmp);
 	}
 }
 
@@ -35,8 +35,8 @@ t_list	*ft_t_list_add(t_list	*list, char *line)
 	node = malloc(sizeof(t_list));
 	if (!node)
 	{
-		ft_error("memory allocation (t_list) error!");
-		ft_free_t_list(list);
+		ft_error("memory allocation error! (t_list)");
+		ft_free_t_list_with_content(list);
 		return (NULL);
 	}
 	node->line = line;
@@ -78,7 +78,7 @@ char	**ft_t_list_to_array(t_list *list)
 	array = (char **)malloc(sizeof(char **) * (height + 1));
 	if (!array)
 	{
-		ft_error("Memmory allocation error!");
+		ft_error("memory allocation error! (char **)");
 		return (NULL);
 	}
 	i = 0;

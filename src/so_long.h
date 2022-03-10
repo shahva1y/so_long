@@ -1,13 +1,13 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+# include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
 # include "img.h"
 # include "keys.h"
@@ -92,13 +92,14 @@ t_set	*ft_init_t_set(t_meta *meta, t_mlx *mlx, t_img *img);
 
 void	ft_free(void *ptr);
 void	ft_free_t_set(t_set *set);
-void	ft_free_t_mlx(t_mlx *mlx);
 void	ft_free_t_meta(t_meta *meta);
-void	ft_free_t_img(t_img *img);
 void	ft_free_t_map(t_map *map);
 void	ft_free_t_list(t_list *list);
 void	ft_free_t_list_with_content(t_list *list);
 void	ft_free_array(char **array);
+
+void	ft_destroy_t_mlx(t_mlx *mlx);
+void	ft_destroy_t_img(t_mlx *mlx, t_img *img);
 
 int		ft_exit(t_set *set);
 void	ft_error_exit(t_meta *meta, t_mlx *mlx, t_img *img);
