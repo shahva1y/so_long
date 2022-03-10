@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static t_bool	ft_error_t_img(t_img *img)
 {

@@ -9,8 +9,8 @@
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
 
-# include "img.h"
-# include "keys.h"
+# include "img_bonus.h"
+# include "keys_bonus.h"
 
 typedef enum e_bool
 {

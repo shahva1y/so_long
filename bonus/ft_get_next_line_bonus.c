@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	ft_increase_memmory_size(char **line, int size)
 {

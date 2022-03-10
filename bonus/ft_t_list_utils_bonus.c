@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_free_t_list_with_content(t_list *list)
 {

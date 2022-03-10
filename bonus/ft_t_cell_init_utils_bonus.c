@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_cell	*ft_init_t_cell_hero_up(void *mlx)
 {

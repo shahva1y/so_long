@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_mlx	*ft_init_t_mlx(t_meta *meta)
 {

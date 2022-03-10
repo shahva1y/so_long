@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	ft_define_t_hero(t_hero *hero, char **array)
 {

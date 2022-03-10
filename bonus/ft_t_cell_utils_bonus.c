@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_destroy_t_cell(t_mlx *mlx, t_cell *cell)
 {

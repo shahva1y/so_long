@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_set	*ft_init_t_set(t_meta *meta, t_mlx *mlx, t_img *img)
 {

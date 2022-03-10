@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	ft_put_img_to_window(int x, int y, t_set *set)
 {
